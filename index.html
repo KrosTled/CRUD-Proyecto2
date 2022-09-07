@@ -1,12 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="main.css" type="text/css">
     <title>CRUD</title>
 </head>
 <body>
-    
+    <div class="main">
+        <div class="mainContenido">
+            <header>
+                <h1>Proyecto CRUD</h1>
+                <hr>
+                <h2>¿Que es CRUD?</h2>
+                <p id="contenido">
+                    Hay diversas funciones comunes en el mundo de programación. Entre ellas están los procesos CRUD, operaciones que trabajan con datos para persistirlos en una base de datos.
+                    Es posible utilizarlos dentro de la interfaz de usuario para facilitar vista, búsqueda y modificación de información.
+                </p>
+            </header>
+            <div class="crud">
+                <div>
+                    <h2>Lista de elementos</h2>
+                    <input type="text" id="crearText">
+                    <button type="button" id="btn1">Agregar registro</button>
+                </div>
+                <div class="boxCRUD">
+                    <ul class="listaCRUD" id="listaCRUD">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./main.js"></script>
 </body>
 </html>

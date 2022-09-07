@@ -1,0 +1,19 @@
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+body{
+    background-color: darkgrey;
+    margin: 0;
+}
+
+.main{
+    margin: 0 20%;
+    background-color: grey;
+    align-self: stretch;
+}
+.main .mainContenido{
+    padding: 0 5%;
+}
+.main header h1{
+    margin-top: 0;
+}
