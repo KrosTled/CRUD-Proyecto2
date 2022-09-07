@@ -1,73 +1,110 @@
-const btn_add = document.querySelector("#btn1");
-btn_add.addEventListener("click", e => agregar());
+// const btn_delete = document.querySelector(".eliminar");
+// btn_delete.addEventListener("click", e => {
+//     // console.log(e.srcElement.parentNode.id)
+//     eliminacion(e.srcElement.parentNode.id)
+// });
 
 refresco()
 
-function refresco(){
+const btn_add = document.querySelector("#btn1");
+btn_add.addEventListener("click", e => {
+    e.preventDefault()
+    agregar()});
+console.log('PASE POR AQUI')
+
+// const btn_delete = document.querySelector(".deletebtn");
+// btn_delete.addEventListener("click", e => {
+    // console.log('PASE POR DELETE')
+    // e.preventDefault()
+    // eliminacion(e.srcElement.parentNode.id)
+// }); 
+
+
+
+
+// const btn_add = document.querySelector("#btn1");
+//     btn_add.addEventListener("click", e => agregar());
+//     console.log('PASE POR AQUI')
+
+
+
+
+function refresco(){   
     const storage = window.localStorage;
     const lista = document.querySelector("#listaCRUD");
-    const newLi = document.createElement('li')
-    const template = element =>{
-        `<li>
-            ${element}
-        </li>`
-    }
+    // const newLi = document.createElement('li')
     let acumulado = JSON.parse(storage.getItem('acumulador'))
-    lista.innerHTML=''
+    lista.innerHTML=``
+    
     if(acumulado !== null){ 
         acumulado.forEach((element) => {
-            ayuda = storage.getItem(element)
-            lista.innerHTML += `<li>${ayuda}</li>`
-        });
+            // console.log(storage.getItem(element))
+            if (storage.getItem(element) !== null){             
+                ayuda = storage.getItem(element)
+                lista.innerHTML += `<li id='${element}' >${ayuda}<button class="editbtn" type="button">Editar</button>
+                <button class="deletebtn" type="button" onclick="eliminacion(this.parentNode.id)">Eliminar</button></li>`       
+            }
+            });
     }
 }
 
 
 function agregar(){
     const storage = window.localStorage;
-    const lista = document.querySelector("#listaCRUD");
     const valor = document.querySelector('#crearText');
-    const newLi = document.createElement('li')
     const contenido = document.createTextNode(valor.value)
     let acumulado = JSON.parse(storage.getItem('acumulador'));
     //Verifica si es nulo
-   
+
     if(acumulado !== null){ 
-        for (i = 0; acumulado.length>=i;i++){
+        for (i = 0; acumulado.length>i;i++){
             id = "newLi" + (i+1)  
             if(!acumulado.includes(id)){ 
-                // console.log("Como llegue aqui?");
-                newLi.setAttribute("id",id)
+                console.log("Agregando algo?");
                 storage.setItem(id,contenido.data)
-                acumula(id)   
-                console.log("No se pudo")                      
-            }else{
-                for(i=0; acumulado.length>i;i++){
-                    ayuda = storage.getItem(id)
-                    newAyuda = document.createTextNode(ayuda)             
-                }
-                console.log('SOY UNA ID '+id)
-                }            
+                acumula(id)                  
+            }       
         }
     }
     else{//Genera primera instancia del arreglo
         console.log("Como llegue aqui?");
-        newLi.setAttribute("id","newLi0")
         storage.setItem("newLi0",contenido.data)
         acumula("newLi0")
     }
-    refresco()  
+    refresco()
 }
+
 function acumula(aregarElement){
     const storage = window.localStorage;
     // obtengo desde el storage, el key acumulador.
     let valida = storage.getItem('acumulador');
-    let acumula = [];
+    let acumulado = [];
     // si no existe el key acumulador, no hago nada. Pero si existe, lo obtengo.
     if (valida != null){
-        acumula = JSON.parse(storage.getItem('acumulador'));
+        acumulado = JSON.parse(storage.getItem('acumulador'));
     }
     const valor = aregarElement;
-    acumula.push(valor);
-    storage.setItem('acumulador', JSON.stringify(acumula));
+    acumulado.push(valor);
+    storage.setItem('acumulador', JSON.stringify(acumulado));
+}
+
+function eliminacion(id){
+    const storage = window.localStorage;
+    let acumula = JSON.parse(storage.getItem('acumulador'));
+    console.log(id);
+    if(1 === acumula.length){
+        nuevoAcumulado = acumula.filter((element) => element !== id)
+        // console.log('SOY UN ARREGLO'+nuevoAcumulado);
+        storage.setItem('acumulador', JSON.stringify(nuevoAcumulado));
+        storage.removeItem(id)  
+        storage.removeItem('acumulador')
+        console.log("Hay un loop en if?");
+    }else{
+        nuevoAcumulado = acumula.filter((element) => element !== id)
+        // console.log('SOY UN ARREGLO'+nuevoAcumulado);
+        storage.setItem('acumulador', JSON.stringify(nuevoAcumulado));
+        storage.removeItem(id)  
+        console.log("Hay un loop en else?");
+    }
+    refresco()
 }
