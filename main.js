@@ -41,7 +41,7 @@ function refresco(){
             // console.log(storage.getItem(element))
             if (storage.getItem(element) !== null){             
                 ayuda = storage.getItem(element)
-                lista.innerHTML += `<li id='${element}' >${ayuda}<button class="editbtn" type="button">Editar</button>
+                lista.innerHTML += `<li id='${element}' >${ayuda}<button class="editbtn" type="button" onclick="editar(this.parentNode.id)">Editar</button>
                 <button class="deletebtn" type="button" onclick="eliminacion(this.parentNode.id)">Eliminar</button></li>`       
             }
             });
@@ -57,8 +57,8 @@ function agregar(){
     //Verifica si es nulo
 
     if(acumulado !== null){ 
-        for (i = 0; acumulado.length>i;i++){
-            id = "newLi" + (i+1)  
+        for (i = 0; acumulado.length>=i;i++){
+            id = "newLi" + (i)  
             if(!acumulado.includes(id)){ 
                 console.log("Agregando algo?");
                 storage.setItem(id,contenido.data)
@@ -107,4 +107,31 @@ function eliminacion(id){
         console.log("Hay un loop en else?");
     }
     refresco()
+}
+
+function editar(id){
+    // console.log("Estoy editando a: "+id)
+    const aEditar = document.getElementById(id)
+    aEditar.innerHTML = `<li id='${id}'><input type="text" id="editar"><button class="editbtn" type="button" onclick="cambiarContenido(this)">Aplicar cambios</button>
+    <button class="editbtn" type="button" onclick="devolver(this.parentNode.id)">Volver</button></li>`
+}
+
+function cambiarContenido(element){
+    let id = element.parentNode.id
+    // console.log("Cambios aplicados, pero   "+ id)
+    // console.log(element.previousElementSibling.value);
+    const storage = window.localStorage;
+    let contenido = element.previousElementSibling.value
+    storage.setItem(id,contenido)
+    const elementoDevuelto = document.getElementById(id)
+    elementoDevuelto.innerHTML = `<li id='${id}' >${contenido}<button class="editbtn" type="button" onclick="editar(this.parentNode.id)">Editar</button>
+    <button class="deletebtn" type="button" onclick="eliminacion(this.parentNode.id)">Eliminar</button></li>`
+}
+function devolver(id){
+    // console.log("ESTOY DEVOLVIENDo")
+    const storage = window.localStorage;
+    let ayuda = storage.getItem(id)
+    const elementoDevuelto = document.getElementById(id)
+    elementoDevuelto.innerHTML = `<li id='${id}' >${ayuda}<button class="editbtn" type="button" onclick="editar(this.parentNode.id)">Editar</button>
+    <button class="deletebtn" type="button" onclick="eliminacion(this.parentNode.id)">Eliminar</button></li>`
 }
