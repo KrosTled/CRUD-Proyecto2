@@ -48,8 +48,8 @@ function refresco(){
             // console.log(storage.getItem(element))
             if (storage.getItem(element) !== null){             
                 ayuda = storage.getItem(element)
-                lista.innerHTML += `<li id='${element}' class="row"><div class="col-6">${ayuda}</div><button class="btn btn-warning col-2" type="button" onclick="editar(this.parentNode.id)">Editar</button>
-                <button class="btn btn-danger col-2" type="button" onclick="eliminacion(this.parentNode.id)">Eliminar</button></li>`       
+                lista.innerHTML += `<li id='${element}' class="row"><div class="col">${ayuda}</div><div class="col-md-auto"><button class="btn btn-warning" type="button" onclick="editar(this.parentElement.parentNode.id)">Editar</button></div>
+                <div class="col col-lg-2"><button class="btn btn-danger" type="button" onclick="eliminacion(this.parentNode.id)">Eliminar</button></div></li>`       
             }
             });
     }
@@ -117,28 +117,17 @@ function eliminacion(id){
 }
 
 function editar(id){
-    // console.log("Estoy editando a: "+id)
     const aEditar = document.getElementById(id)
-    aEditar.innerHTML = `<li id='${id}'><input type="text" id="editar"><button class="editbtn" type="button" onclick="cambiarContenido(this)">Aplicar cambios</button>
-    <button class="editbtn" type="button" onclick="devolver(this.parentNode.id)">Volver</button></li>`
+    aEditar.innerHTML = `<li id='${id}' class="row"><div class="col"><input type="text" id="editar"></div><div class="col-md-auto"><button class="btn btn-warning" type="button" onclick="cambiarContenido(this)">Aplicar cambios</button></div>
+    <div class="col col-lg-2"><button class="btn btn-danger" type="button" onclick="refresco()">Eliminar</button></div></li>`
 }
-
+// `<li id='${id}'><input type="text" id="editar"><button class="editbtn" type="button" onclick="cambiarContenido(this)">Aplicar cambios</button>
+    // <button class="editbtn" type="button" onclick="refresco()">Volver</button></li>`
 function cambiarContenido(element){
-    let id = element.parentNode.id
-    // console.log("Cambios aplicados, pero   "+ id)
-    // console.log(element.previousElementSibling.value);
+    // console.log(element.parentElement.previousElementSibling.firstChild.value)
+    let id = element.parentElement.parentNode.id
     const storage = window.localStorage;
-    let contenido = element.previousElementSibling.value
+    let contenido = element.parentElement.previousElementSibling.firstChild.value
     storage.setItem(id,contenido)
-    const elementoDevuelto = document.getElementById(id)
-    elementoDevuelto.innerHTML = `<li id='${id}' >${contenido}<button class="editbtn" type="button" onclick="editar(this.parentNode.id)">Editar</button>
-    <button class="deletebtn" type="button" onclick="eliminacion(this.parentNode.id)">Eliminar</button></li>`
-}
-function devolver(id){
-    // console.log("ESTOY DEVOLVIENDo")
-    const storage = window.localStorage;
-    let ayuda = storage.getItem(id)
-    const elementoDevuelto = document.getElementById(id)
-    elementoDevuelto.innerHTML = `<li id='${id}' >${ayuda}<button class="editbtn" type="button" onclick="editar(this.parentNode.id)">Editar</button>
-    <button class="deletebtn" type="button" onclick="eliminacion(this.parentNode.id)">Eliminar</button></li>`
+    refresco()
 }
