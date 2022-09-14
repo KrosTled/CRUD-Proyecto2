@@ -49,7 +49,7 @@ function refresco(){
             if (storage.getItem(element) !== null){             
                 ayuda = storage.getItem(element)
                 lista.innerHTML += `<li id='${element}' class="row"><div class="col">${ayuda}</div><div class="col-md-auto"><button class="btn btn-warning" type="button" onclick="editar(this.parentElement.parentNode.id)">Editar</button></div>
-                <div class="col col-lg-2"><button class="btn btn-danger" type="button" onclick="eliminacion(this.parentNode.id)">Eliminar</button></div></li>`       
+                <div class="col col-lg-2"><button class="btn btn-danger" type="button" onclick="eliminacion(this.parentElement.parentNode.id)">Eliminar</button></div></li>`       
             }
             });
     }
@@ -117,17 +117,27 @@ function eliminacion(id){
 }
 
 function editar(id){
+    // console.log("Estoy editando a: "+id)
     const aEditar = document.getElementById(id)
     aEditar.innerHTML = `<li id='${id}' class="row"><div class="col"><input type="text" id="editar"></div><div class="col-md-auto"><button class="btn btn-warning" type="button" onclick="cambiarContenido(this)">Aplicar cambios</button></div>
-    <div class="col col-lg-2"><button class="btn btn-danger" type="button" onclick="refresco()">Eliminar</button></div></li>`
+    <div class="col col-lg-2"><button class="btn btn-danger" type="button" onclick="refresco()">Eliminar</button></div></li>`   
 }
-// `<li id='${id}'><input type="text" id="editar"><button class="editbtn" type="button" onclick="cambiarContenido(this)">Aplicar cambios</button>
-    // <button class="editbtn" type="button" onclick="refresco()">Volver</button></li>`
+
 function cambiarContenido(element){
-    // console.log(element.parentElement.previousElementSibling.firstChild.value)
     let id = element.parentElement.parentNode.id
+    // console.log(id)
     const storage = window.localStorage;
     let contenido = element.parentElement.previousElementSibling.firstChild.value
     storage.setItem(id,contenido)
-    refresco()
+    const elementoDevuelto = document.getElementById(id)
+    elementoDevuelto.innerHTML = `<li id='${id}' class="row"><div class="col">${contenido}</div><div class="col-md-auto"><button class="btn btn-warning" type="button" onclick="editar(this.parentElement.parentNode.id)">Editar</button></div>
+    <div class="col col-lg-2"><button class="btn btn-danger" type="button" onclick="eliminacion(this.parentElement.parentNode.id)">Eliminar</button></div></li>`
+}
+function devolver(id){
+    // console.log("ESTOY DEVOLVIENDo")
+    const storage = window.localStorage;
+    let ayuda = storage.getItem(id)
+    const elementoDevuelto = document.getElementById(id)
+    elementoDevuelto.innerHTML = `<li id='${id}' class="row"><div class="col">${ayuda}</div><div class="col-md-auto"><button class="btn btn-warning" type="button" onclick="editar(this.parentElement.parentNode.id)">Editar</button></div>
+    <div class="col col-lg-2"><button class="btn btn-danger" type="button" onclick="eliminacion(this.parentElement.parentNode.id)">Eliminar</button></div></li>`
 }
