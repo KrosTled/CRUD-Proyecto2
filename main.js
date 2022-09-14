@@ -10,7 +10,14 @@ const btn_add = document.querySelector("#btn1");
 btn_add.addEventListener("click", e => {
     e.preventDefault()
     agregar()});
-console.log('PASE POR AQUI')
+// console.log('PASE POR AQUI')
+const input_add= document.querySelector("#crearText");
+input_add.addEventListener("keypress", e => {
+    if(e.key === "Enter"){
+        e.preventDefault()
+        agregar()
+    }});
+// console.log('PASE POR AQUI')
 
 // const btn_delete = document.querySelector(".deletebtn");
 // btn_delete.addEventListener("click", e => {
@@ -41,8 +48,8 @@ function refresco(){
             // console.log(storage.getItem(element))
             if (storage.getItem(element) !== null){             
                 ayuda = storage.getItem(element)
-                lista.innerHTML += `<li id='${element}' >${ayuda}<button class="editbtn" type="button" onclick="editar(this.parentNode.id)">Editar</button>
-                <button class="deletebtn" type="button" onclick="eliminacion(this.parentNode.id)">Eliminar</button></li>`       
+                lista.innerHTML += `<li id='${element}' class="row"><div class="col-6">${ayuda}</div><button class="btn btn-warning col-2" type="button" onclick="editar(this.parentNode.id)">Editar</button>
+                <button class="btn btn-danger col-2" type="button" onclick="eliminacion(this.parentNode.id)">Eliminar</button></li>`       
             }
             });
     }
