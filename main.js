@@ -48,9 +48,11 @@ function refresco(){
             // console.log(storage.getItem(element))
             if (storage.getItem(element) !== null){             
                 ayuda = storage.getItem(element)
-                lista.innerHTML += `<li id='${element}' class="row"><div class="col">${ayuda}</div><div class="col-md-auto"><button class="btn btn-warning" type="button" onclick="editar(this.parentElement.parentNode.id)">Editar</button></div>
-                <div class="col col-lg-2"><button class="btn btn-danger" type="button" onclick="eliminacion(this.parentElement.parentNode.id)">Eliminar</button></div></li>`       
-            }
+                if(ayuda !== ""){
+                    lista.innerHTML += `<li id='${element}' class="row align-content-center"><div class="col">${ayuda}</div><div class="col-md-auto"><button class="btn btn-warning" type="button" onclick="editar(this.parentElement.parentNode.id)">Editar</button></div>
+                    <div class="col col-lg-2"><button class="btn btn-danger" type="button" onclick="eliminacion(this.parentElement.parentNode.id)">Eliminar</button></div></li>` 
+                }
+           }
             });
     }
 }
@@ -105,13 +107,13 @@ function eliminacion(id){
         storage.setItem('acumulador', JSON.stringify(nuevoAcumulado));
         storage.removeItem(id)  
         storage.removeItem('acumulador')
-        console.log("Hay un loop en if?");
+        // console.log("Hay un loop en if?");
     }else{
         nuevoAcumulado = acumula.filter((element) => element !== id)
         // console.log('SOY UN ARREGLO'+nuevoAcumulado);
         storage.setItem('acumulador', JSON.stringify(nuevoAcumulado));
         storage.removeItem(id)  
-        console.log("Hay un loop en else?");
+        // console.log("Hay un loop en else?");
     }
     refresco()
 }
@@ -120,7 +122,7 @@ function editar(id){
     // console.log("Estoy editando a: "+id)
     const aEditar = document.getElementById(id)
     aEditar.innerHTML = `<li id='${id}' class="row"><div class="col"><input type="text" id="editar"></div><div class="col-md-auto"><button class="btn btn-warning" type="button" onclick="cambiarContenido(this)">Aplicar cambios</button></div>
-    <div class="col col-lg-2"><button class="btn btn-danger" type="button" onclick="refresco()">Eliminar</button></div></li>`   
+    <div class="col col-lg-2"><button class="btn btn-secondary" type="button" onclick="refresco()">volver</button></div></li>`   
 }
 
 function cambiarContenido(element){
@@ -128,10 +130,13 @@ function cambiarContenido(element){
     // console.log(id)
     const storage = window.localStorage;
     let contenido = element.parentElement.previousElementSibling.firstChild.value
-    storage.setItem(id,contenido)
-    const elementoDevuelto = document.getElementById(id)
-    elementoDevuelto.innerHTML = `<li id='${id}' class="row"><div class="col">${contenido}</div><div class="col-md-auto"><button class="btn btn-warning" type="button" onclick="editar(this.parentElement.parentNode.id)">Editar</button></div>
-    <div class="col col-lg-2"><button class="btn btn-danger" type="button" onclick="eliminacion(this.parentElement.parentNode.id)">Eliminar</button></div></li>`
+    if(contenido !== ""){
+        storage.setItem(id,contenido)
+        const elementoDevuelto = document.getElementById(id)
+        elementoDevuelto.innerHTML = `<li id='${id}' class="row"><div class="col">${contenido}</div><div class="col-md-auto"><button class="btn btn-warning" type="button" onclick="editar(this.parentElement.parentNode.id)">Editar</button></div>
+        <div class="col col-lg-2"><button class="btn btn-danger" type="button" onclick="eliminacion(this.parentElement.parentNode.id)">Eliminar</button></div></li>`
+    }
+
 }
 function devolver(id){
     // console.log("ESTOY DEVOLVIENDo")
