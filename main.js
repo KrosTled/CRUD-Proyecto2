@@ -49,8 +49,8 @@ function refresco(){
             if (storage.getItem(element) !== null){             
                 ayuda = storage.getItem(element)
                 if(ayuda !== ""){
-                    lista.innerHTML += `<li id='${element}' class="row align-content-center"><div class="col">${ayuda}</div><div class="col-md-auto"><button class="btn btn-warning" type="button" onclick="editar(this.parentElement.parentNode.id)">Editar</button></div>
-                    <div class="col col-lg-2"><button class="btn btn-danger" type="button" onclick="eliminacion(this.parentElement.parentNode.id)">Eliminar</button></div></li>` 
+                    lista.innerHTML += `<li id='${element}' class="row justify-content-center"><div class="col"><p class="alinear text-justify">${ayuda}</p></div><div class="col-md-auto"><button class="btn btn-warning alinear" type="button" onclick="editar(this.parentElement.parentNode.id)">Editar</button></div>
+                    <div class="col col-lg-2"><button class="btn btn-danger alinear" type="button" onclick="eliminacion(this.parentElement.parentNode.id)">Eliminar</button></div></li>` 
                 }
            }
             });
@@ -121,8 +121,8 @@ function eliminacion(id){
 function editar(id){
     // console.log("Estoy editando a: "+id)
     const aEditar = document.getElementById(id)
-    aEditar.innerHTML = `<li id='${id}' class="row"><div class="col"><input type="text" id="editar"></div><div class="col-md-auto"><button class="btn btn-warning" type="button" onclick="cambiarContenido(this)">Aplicar cambios</button></div>
-    <div class="col col-lg-2"><button class="btn btn-secondary" type="button" onclick="refresco()">volver</button></div></li>`   
+    aEditar.innerHTML = `<li id='${id}' class="row"><div class="col"><input type="text" id="editar" class="form-control alinear"></div><div class="col-md-auto"><button class="btn btn-warning alinear" type="button" onclick="cambiarContenido(this)">Aplicar cambios</button></div>
+    <div class="col col-lg-2"><button class="btn btn-secondary alinear" type="button" onclick="refresco()">volver</button></div></li>`   
 }
 
 function cambiarContenido(element){
@@ -133,8 +133,8 @@ function cambiarContenido(element){
     if(contenido !== ""){
         storage.setItem(id,contenido)
         const elementoDevuelto = document.getElementById(id)
-        elementoDevuelto.innerHTML = `<li id='${id}' class="row"><div class="col">${contenido}</div><div class="col-md-auto"><button class="btn btn-warning" type="button" onclick="editar(this.parentElement.parentNode.id)">Editar</button></div>
-        <div class="col col-lg-2"><button class="btn btn-danger" type="button" onclick="eliminacion(this.parentElement.parentNode.id)">Eliminar</button></div></li>`
+        elementoDevuelto.innerHTML = `<li id='${id}' class="row"><div class="col">${contenido}</div><div class="col-md-auto"><button class="btn btn-warning alinear" type="button" onclick="editar(this.parentElement.parentNode.id)">Editar</button></div>
+        <div class="col col-lg-2"><button class="btn btn-danger alinear" type="button" onclick="eliminacion(this.parentElement.parentNode.id)">Eliminar</button></div></li>`
     }
 
 }
