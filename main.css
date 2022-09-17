@@ -6,12 +6,26 @@ html{
     height: 100%;
 }
 .list-group{
-    height: 559px;
+    height: 539px;
     overflow-y:scroll;
     overflow-x: hidden;
 }
-nav{
+nav{  
     padding: 10px 10px;
+    align-items: center;
+}
+.navContainer{
+    display: flex;
+}
+.navContainer div{
+    margin-left: 10px;
+}
+.navAlign{
+    display: flex;
+    flex-direction: row;
+}
+header{
+    padding-top: 20px;
 }
 .navButton{
     padding: 1px 4px;
@@ -44,4 +58,19 @@ footer div p{
 .logo{
     width: 50px;
     margin-right: 10px;
+}
+@media only screen and (max-width:480px){
+    .navContainer{
+        display: block;
+    }
+    .navAlign{
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+    }
+    .navAlign img{
+        display: flex;
+        flex-direction: row;
+        align-self: center;
+    }
 }
