@@ -6,11 +6,16 @@ html{
     height: 100%;
 }
 .list-group{
-    height: 643px;
+    height: 559px;
     overflow-y:scroll;
     overflow-x: hidden;
 }
-
+nav{
+    padding: 10px 10px;
+}
+.navButton{
+    padding: 1px 4px;
+}
 .row{
     margin-top: 10px;
     padding: 3px 6px;
@@ -19,4 +24,19 @@ html{
 .alinear{
     margin-top: 5px;
     width: 100%;
+}
+footer{
+    justify-content: center;
+}
+footer div{
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    bottom: 0px;
+}
+footer div p{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-top: 20px;
 }

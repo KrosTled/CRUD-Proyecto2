@@ -23,6 +23,16 @@ function filtrar(id){
     let elemento = list.filter(list => list.id == id);
     return elemento[0]
 }
+function remplazo(id, aux){
+    let list = read("crud");
+    list.map(function(dato){
+        if(dato.id == id){
+          dato.value = aux;
+        }
+        return dato;
+    });
+    return list
+}
 
 function refresco(){   
     const storage = window.localStorage;
@@ -93,9 +103,9 @@ function cambiarContenido(element){
     let id = element.parentElement.parentNode.id
     let contenido = element.parentElement.previousElementSibling.firstChild.value
     if(contenido !== ""){
-        let elemento = filtrar(id)
-        elemento.value = contenido
+        list = remplazo(id,contenido)
         save("crud",list)
+        console.log(list)
         const elementoDevuelto = document.getElementById(id)
         elementoDevuelto.innerHTML = `<li id='${id}' class="row"><div class="col">${contenido}</div><div class="col-md-auto"><button class="btn btn-warning alinear" type="button" onclick="editar(this.parentElement.parentNode.id)">Editar</button></div>
         <div class="col col-lg-2"><button class="btn btn-danger alinear" type="button" onclick="eliminacion(this.parentElement.parentNode.id)">Eliminar</button></div></li>`

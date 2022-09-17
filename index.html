@@ -10,38 +10,46 @@
     <title>CRUD</title>
 </head>
 <body class="bg-secondary bg-gradient">
+    <nav class="bg-dark">
+        <a href="#header" class="btn btn-light navButton">Inicio</a>
+        <a href="#crearText" class="btn btn-light navButton">Agregar mas elementos</a>
+        <a href="#listaCrud" class="btn btn-light navButton">Tu lista</a>
+    </nav>
     <div class="container bg-dark bg-gradient">
-        <div class="mainContenido">
-            <header>
-                <h1>Proyecto CRUD</h1>
-                <hr>
-                <h2>¿Que es CRUD?</h2>
-                <p id="contenido">
-                    Hay diversas funciones comunes en el mundo de programación. Entre ellas están los procesos CRUD, operaciones que trabajan con datos para persistirlos en una base de datos.
-                    Es posible utilizarlos dentro de la interfaz de usuario para facilitar vista, búsqueda y modificación de información.
-                </p>
-            </header>
-            <div class="crud">
-                <div>
-                    <h2>Lista de elementos</h2>
-                    <form class="form">
-                        <div class="row">
-                            <div class="col">
-                                <input type="text" id="crearText" class="form-control"> 
-                            </div>
-                            <div class="col col-lg-2">
-                                <button type="button" id="btn1" class="btn btn-primary">Agregar registro</button>
-                            </div>
+        
+        <header>
+            <h1>¿Que ya jugue?</h1>
+            <hr>
+            <h2>Aqui podras listarlos</h2>
+            <p id="contenido">
+                Se almacenara en el local storage de tu computadora / celular para asi mantener un respaldo de estos.
+            </p>
+        </header>
+        <div class="crud">
+            <div>
+                <h2>Lista de elementos</h2>
+                <form class="form">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" id="crearText" class="form-control"> 
                         </div>
-                     </form>
-                   </div>
-                <div class="boxCRUD">
-                    <ul class="list-group" id="listaCRUD">
-                    </ul>
+                        <div class="col col-lg-2">
+                            <button type="button" id="btn1" class="btn btn-primary">Agregar registro</button>
+                        </div>
+                    </div>
+                </form>
                 </div>
+            <div class="boxCRUD">
+                <ul class="list-group" id="listaCRUD">
+                </ul>
             </div>
-        </div>
+        </div>    
     </div>
+    <footer class="bg-dark">
+        <div class="container">
+            <p>by Matias Parada</p>
+        </div>
+    </footer>
     <script src="./main.js"></script>
 </body>
 </html>
